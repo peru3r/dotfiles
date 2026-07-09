@@ -1,13 +1,11 @@
 # dotfiles
 
-
+```bash
 # Alacritty themes
 mkdir -p ~/.config/alacritty/themes
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
-# zsh settings
-echo "source \$HOME/.config/zsh/env.zsh" >> ~/.zshrc
-echo "source \$HOME/.config/zsh/aliases.zsh" >> ~/.zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 
 # Install nodejs and pyright LSP server for Python
@@ -29,12 +27,17 @@ mkdir -p ~/.local/share/nvim/site/pack/packer/start/
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
     ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
+# Build telescope for nvim
+cd ~/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim
+make
+
+# but may be dont make telescope
+
+For WSL download win32yank.exe and copy it to C/Windows/System32
+In nvim/init.lua uncomment block for win32yank.exe 
+
+```
 
 TODO:
-- добавить .zshrc
-- добавить в README установку zshrc 
-- добавить сборку fzf-telescope
-- добавить установку zsh
-- сделать из этого скрипт для развертывания рабочего места
-- Добавить установку win32yank.exe для WSL и не забыть расскоментить блок в 
-                                                                nvim/init.lua
+- add install zsh
+- I will do it in script may be
