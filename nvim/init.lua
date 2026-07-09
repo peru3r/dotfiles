@@ -1,22 +1,8 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-
-=======
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 vim.opt.mouse = "a" -- Enable mouse support
 vim.opt.encoding = "utf-8"       -- Общая кодировка (необязательно, по умолчанию UTF-8)
 vim.opt.fileencoding = "utf-8"  -- Кодировка файлов
 vim.opt.number = true -- Show line numbers
-<<<<<<< HEAD
 vim.opt.relativenumber = true -- относительные номера строк
-=======
-<<<<<<< HEAD
-=======
-vim.opt.relativenumber = true -- относительные номера строк
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 vim.opt.cursorline = false -- Disable highlight current cursor's line
 vim.opt.swapfile = false -- Disable .swp files 
 vim.opt.scrolloff = 7 -- Number of lines left visible above/below the cursor when scrolling
@@ -95,7 +81,6 @@ require('packer').startup(function(use)
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip' -- Сниппеты
     use 'nvim-treesitter/nvim-treesitter' -- Подсветка синтаксиса
-<<<<<<< HEAD
     
     use {
         'goolord/alpha-nvim',
@@ -103,19 +88,6 @@ require('packer').startup(function(use)
 }
 
 -- COLOR SCHEMES
-=======
-<<<<<<< HEAD
-
-=======
-    
-    use {
-        'goolord/alpha-nvim',
-        requires = { 'nvim-tree/nvim-web-devicons' }
-}
-
--- COLOR SCHEMES
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
     use 'morhetz/gruvbox' -- Color schemes
     use 'ayu-theme/ayu-vim'
     --[[
@@ -134,16 +106,8 @@ require('packer').startup(function(use)
     --]]
     use 'sainnhe/gruvbox-material'
     use 'rebelot/kanagawa.nvim'
-<<<<<<< HEAD
     use 'vossenwout/guts.nvim'
 
-=======
-<<<<<<< HEAD
-=======
-    use 'vossenwout/guts.nvim'
-
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 
     -- Comment/uncomment by gcc for current line of gc for seleted lines
     use {
@@ -164,39 +128,6 @@ require('packer').startup(function(use)
         })
       end
     }
-<<<<<<< HEAD
-    use {
-      'nvim-telescope/telescope.nvim',
-      requires = {
-        { 'nvim-lua/plenary.nvim' },
-        {
-          'nvim-telescope/telescope-fzf-native.nvim',
-          run = 'make',  -- или cmake-строка ниже
-          -- run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release'
-        },
-      }
-    }
-=======
-<<<<<<< HEAD
->>>>>>> 444d7a2 (add README.md and zsh)
-
-    use 'Pocco81/auto-save.nvim' -- Автосохранение
-    use 'nvimtools/none-ls.nvim' -- Продолжение null-ls, форматирование и линтинг
-end)
-
-
--- Color scheme
--- vim.cmd([[colorscheme "rose-pine-main"]])
---vim.cmd([[colorscheme gruvbox-material]]) -- kanagawa-wave, kanagawa-dragon, kanagawa-lotus
-vim.cmd.colorscheme("guts")
-
--- LSP
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-<<<<<<< HEAD
-
-=======
-=======
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
@@ -223,8 +154,6 @@ vim.cmd.colorscheme("guts")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 local on_attach = function(client, bufnr)
 
     -- Быстрые команды для LSP
@@ -248,34 +177,6 @@ local on_attach = function(client, bufnr)
 end
 
 -- Настройка LSP для Python (Pyright)
-<<<<<<< HEAD
-vim.lsp.config('pyright', {
-=======
-<<<<<<< HEAD
-lspconfig.pyright.setup({
->>>>>>> 444d7a2 (add README.md and zsh)
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          useLibraryCodeForTypes = true,
-          diagnosticMode = "workspace",
-      },
-    },
-  },
-})
-
-
-
--- Пример настройки LSP для TypeScript
-<<<<<<< HEAD
-
-vim.lsp.config('ts_ls', {
-=======
-lspconfig.ts_ls.setup({
-=======
 vim.lsp.config('pyright', {
     capabilities = capabilities,
     on_attach = on_attach,
@@ -295,44 +196,10 @@ vim.lsp.config('pyright', {
 -- Пример настройки LSP для TypeScript
 
 vim.lsp.config('ts_ls', {
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
     capabilities = capabilities,
     on_attach = on_attach,
 })
 
-<<<<<<< HEAD
-
-
-=======
-<<<<<<< HEAD
->>>>>>> 444d7a2 (add README.md and zsh)
--- Пример настройки LSP для Go
-
-vim.lsp.config('gopls', {
-    cmd = { "gopls" },
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      gopls = {
-        analyses = { unusedparams = true },
-        staticcheck = true,
-    },
-  },
-})
-
--- None-ls (бывший null-ls) для Prettier
-local null_ls = require('null-ls')
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.prettier,
-  },
-})
-
-<<<<<<< HEAD
-=======
-=======
 
 
 -- Пример настройки LSP для Go
@@ -358,17 +225,12 @@ null_ls.setup({
   },
 })
 
->>>>>>> 444d7a2 (add README.md and zsh)
 vim.lsp.enable('pyright')
 vim.lsp.enable('ts_ls')
 vim.lsp.enable('gopls')
 vim.lsp.enable('rust_analyzer')
 
 
-<<<<<<< HEAD
-=======
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 -- Telescope
 require('telescope').setup()
 -- require('telescope').load_extension('fzf')
@@ -393,14 +255,7 @@ require('auto-save').setup()
 -- Autocomplete settings
 local cmp = require('cmp')
 local luasnip = require('luasnip')
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
 cmp.setup({
   snippet = {
     expand = function(args)
@@ -408,15 +263,7 @@ cmp.setup({
     end,
   },
   completion = {
-<<<<<<< HEAD
     autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged }, -- Включить автоматическое появление
-=======
-<<<<<<< HEAD
-    autocomplete = false, -- Отключить автоматическое появление
-=======
-    autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged }, -- Включить автоматическое появление
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
   },
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(), -- Вызов меню автокомплита
@@ -464,11 +311,6 @@ for open, close in pairs(pair_map) do
     map("i", open, open .. close .. "<Left>", {})
 end
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 444d7a2 (add README.md and zsh)
 
 -- Visual: cc -> yank to system clipboard (y"+)
 vim.keymap.set('v','cc','"+y', { noremap = true, silent = true })
@@ -554,7 +396,3 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 
-<<<<<<< HEAD
-=======
->>>>>>> d2862f4 (new files from mac)
->>>>>>> 444d7a2 (add README.md and zsh)
