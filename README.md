@@ -39,5 +39,6 @@ In nvim/init.lua uncomment block for win32yank.exe
 ```
 
 TODO:
+- add install utils: nvim tmux bat tree 
 - add install zsh
 - I will do it in script may be
