@@ -34,10 +34,10 @@ vim.api.nvim_create_autocmd('FileType', {
 
     pattern = 'python',
     callback = function()
-
+        
         vim.opt.colorcolumn = '88'
-        vim.keymap.set('n', '<C-h>', ':w<CR>:!python3.11 %<CR>', { buffer = true, silent = true })
-        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!python3.11 %<CR>', { buffer = true, silent = true })
+        vim.keymap.set('n', '<C-h>', ':w<CR>:!python3 %<CR>', { buffer = true, silent = true })
+        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!python3 %<CR>', { buffer = true, silent = true })
     end
 })
 
@@ -69,6 +69,7 @@ vim.keymap.set('n', 'L', 'gt', { noremap = true })
 vim.keymap.set('n', ',f', ':Telescope find_files<CR>', { noremap = true })
 vim.keymap.set('n', ',g', ':Telescope live_grep<CR>', { noremap = true })
 vim.keymap.set('n', 'gw', ':bp|bd #<CR>', { noremap = true, silent = true })
+vim.keymap.set('v','cc','"+y', { noremap = true, silent = true })   -- Visual: cc -> yank to system clipboard (y"+)
 
 -- Plugins with packer.nvim
 require('packer').startup(function(use)
@@ -108,26 +109,28 @@ require('packer').startup(function(use)
     use 'rebelot/kanagawa.nvim'
     use 'vossenwout/guts.nvim'
 
-
     -- Comment/uncomment by gcc for current line of gc for seleted lines
     use {
-      'numToStr/Comment.nvim',
-      config = function()
-        require('Comment').setup({
-            -- Включить/отключить добавление пробела после символа комментария
-            padding = true,
-            -- Переназначаем ключевые привязки
-            toggler = {
-                line = ',cc',  -- Закомментировать строку (вместо 'gcc')
-                block = ',cb', -- Закомментировать блок (вместо 'gbc')
-            },
-            opleader = {
-                line = ',c',   -- Закомментировать строки в визуальном режиме (вместо 'gc')
-                block = ',b',  -- Закомментировать блоки в визуальном режиме (вместо 'gb')
-            },
-        })
-      end
-    }
+        'nvim-mini/mini.comment',
+        config = function()
+            require('mini.comment').setup({
+                -- Добавлять пробел после символа комментария
+                options = {
+                    pad_comment_parts = true,
+                },
+        
+                -- Свои ключевые привязки
+                mappings = {
+                    comment = ',cc',       -- Normal: коммент строки
+                    comment_line = ',cc',  -- Явно на строку
+                    comment_visual = ',c', -- Visual: коммент выделения
+                    textobject = '',
+                },
+            })
+        end,
+        }
+
+    
     use {
       'nvim-telescope/telescope.nvim',
       requires = {
@@ -312,8 +315,6 @@ for open, close in pairs(pair_map) do
 end
 
 
--- Visual: cc -> yank to system clipboard (y"+)
-vim.keymap.set('v','cc','"+y', { noremap = true, silent = true })
 
 
 -- Start screen
