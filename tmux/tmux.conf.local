@@ -84,23 +84,23 @@ tmux_conf_24b_colour=auto
 tmux_conf_theme=enabled
 
 # default theme
-tmux_conf_theme_colour_1="#1e1e2e"    # dark gray
-tmux_conf_theme_colour_2="#313244"    # gray
-tmux_conf_theme_colour_3="#a6adc8"    # light gray
-tmux_conf_theme_colour_4="#89b4fa"    # light blue
-tmux_conf_theme_colour_5="#f9e2af"    # yellow
-tmux_conf_theme_colour_6="#1e1e2e"    # dark gray
-tmux_conf_theme_colour_7="#cdd6f4"    # white
-tmux_conf_theme_colour_8="#1e1e2e"    # dark gray
-tmux_conf_theme_colour_9="#f9e2af"    # yellow
-tmux_conf_theme_colour_10="#ff00af"   # pink
-tmux_conf_theme_colour_11="#f5c2e7"  # green
-tmux_conf_theme_colour_12="#6c7086"   # light gray
-tmux_conf_theme_colour_13="#cdd6f4"   # white
-tmux_conf_theme_colour_14="#1e1e2e"   # dark gray
-tmux_conf_theme_colour_15="#1e1e2e"   # dark gray
-tmux_conf_theme_colour_16="#f38ba8"   # red
-tmux_conf_theme_colour_17="#cdd6f4"   # white
+tmux_conf_theme_colour_1="#101113"   # rainy_night_black_1 — main bg
+tmux_conf_theme_colour_2="#161719"   # rainy_night_black_2 — alt bg / inactive panels
+tmux_conf_theme_colour_3="#787487"   # dragon_slayer_gray_2 — subtle fg / inactive windows
+tmux_conf_theme_colour_4="#83799C"   # griffith_purple — primary accent (active window, active border)
+tmux_conf_theme_colour_5="#ac7f7b"   # campfire — secondary accent (bell, mode, message)
+tmux_conf_theme_colour_6="#101113"   # rainy_night_black_1 — fg on bright accent bg (status left 1)
+tmux_conf_theme_colour_7="#9f9e99"   # dragon_slayer_white — main fg
+tmux_conf_theme_colour_8="#101113"   # rainy_night_black_1 — fg on casca_pink bg (status left 2)
+tmux_conf_theme_colour_9="#ac7f7b"   # campfire — status left section 1 bg
+tmux_conf_theme_colour_10="#8a4f53"  # casca_pink — status left section 2 bg
+tmux_conf_theme_colour_11="#554A62"  # dragon_slayer_gray_1 — status left section 3 bg (muted purple)
+tmux_conf_theme_colour_12="#787487"  # dragon_slayer_gray_2 — status right section 1 fg
+tmux_conf_theme_colour_13="#9f9e99"  # dragon_slayer_white — status right section 2 fg
+tmux_conf_theme_colour_14="#101113"  # rainy_night_black_1 — status right section 3 fg (on accent)
+tmux_conf_theme_colour_15="#161719"  # rainy_night_black_2 — status right section 1 bg
+tmux_conf_theme_colour_16="#6f2e2a"  # blood_red — status right section 3 bg / error / root
+tmux_conf_theme_colour_17="#9f9e99"  # dragon_slayer_white — fg on red bg
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -140,9 +140,9 @@ tmux_conf_theme_pane_border_style=thin
 
 # pane borders colours:
 tmux_conf_theme_pane_border="$tmux_conf_theme_colour_2"
-tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_3"
+tmux_conf_theme_pane_active_border="$tmux_conf_theme_colour_4"
 %if #{>=:#{version},3.2}
-tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_9,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
+tmux_conf_theme_pane_active_border="#{?pane_in_mode,$tmux_conf_theme_colour_5,#{?synchronize-panes,$tmux_conf_theme_colour_16,$tmux_conf_theme_colour_4}}"
 %endif
 
 # pane indicator colours (when you hit <prefix> + q)

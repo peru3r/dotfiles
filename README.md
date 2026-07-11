@@ -5,8 +5,13 @@
 mkdir -p ~/.config/alacritty/themes
 git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
 
+cp alacritty/guts.toml ~/.config/alacritty/themes/themes/
+
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+
+# optional
+cp zsh/oh-my-zsh/guts.zsh-theme ~/.oh-my-zsh/custom/themes/
 
 # Install nodejs and pyright LSP server for Python
 # https://nodejs.org/en/download/package-manager
@@ -35,10 +40,6 @@ make
 
 # For WSL download win32yank.exe and copy it to C/Windows/System32
 # In nvim/init.lua uncomment block for win32yank.exe 
-
-# after isntall oh-my-zsh
-cp zsh/oh-my-zsh/guts.zsh-theme ~/.oh-my-zsh/custom/themes/
-
 
 ```
 

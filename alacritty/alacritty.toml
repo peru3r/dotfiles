@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/kanagawa_wave.toml"
+    "~/.config/alacritty/themes/guts.toml"
 #
 # DOWNLOAD FROM:
 # https://github.com/alacritty/alacritty-theme

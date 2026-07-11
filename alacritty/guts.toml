@@ -1,0 +1,34 @@
+# guts.nvim color theme for Alacritty
+# https://github.com/vossenwout/guts.nvim
+
+[colors.primary]
+background = "#101113"  # rainy_night_black_1
+foreground = "#9f9e99"  # dragon_slayer_white
+
+[colors.cursor]
+text   = "#101113"      # snow_gray
+cursor = "#83799C"      # griffith_purple
+
+[colors.selection]
+text       = "#101113"
+background = "#83799C"  # griffith_purple
+
+[colors.normal]
+black   = "#161719"     # rainy_night_black_2
+red     = "#6f2e2a"     # blood_red
+green   = "#7a837c"     # cliff_green
+yellow  = "#ac7f7b"     # campfire
+blue    = "#697a9a"     # night_sky_blue
+magenta = "#83799C"     # griffith_purple
+cyan    = "#787487"     # dragon_slayer_gray_2
+white   = "#9f9e99"     # dragon_slayer_white
+
+[colors.bright]
+black   = "#554A62"     # dragon_slayer_gray_1
+red     = "#6f2e2a"     # blood_red
+green   = "#a7d8b0"     # brand_of_sacrifice_green_1 (highlight)
+yellow  = "#ac7f7b"     # campfire
+blue    = "#697a9a"     # night_sky_blue
+magenta = "#997e95"     # eclipse_pink (constant)
+cyan    = "#a7d8b0"     # brand_of_sacrifice_green_1
+white   = "#9f9e99"     # dragon_slayer_white
