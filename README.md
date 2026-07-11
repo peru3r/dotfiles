@@ -33,8 +33,12 @@ make
 
 # but may be dont make telescope
 
-For WSL download win32yank.exe and copy it to C/Windows/System32
-In nvim/init.lua uncomment block for win32yank.exe 
+# For WSL download win32yank.exe and copy it to C/Windows/System32
+# In nvim/init.lua uncomment block for win32yank.exe 
+
+# after isntall oh-my-zsh
+cp zsh/oh-my-zsh/guts.zsh-theme ~/.oh-my-zsh/custom/themes/
+
 
 ```
 
@@ -42,3 +46,4 @@ TODO:
 - add install utils: nvim tmux bat tree 
 - add install zsh
 - I will do it in script may be
+- add confs for skhd and yabai and add they to launchctl
