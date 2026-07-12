@@ -2,7 +2,7 @@
 # https://github.com/vossenwout/guts.nvim
 
 [colors.primary]
-background = "#101113"  # rainy_night_black_1
+background = "#161719"  # rainy_night_black_2
 foreground = "#9f9e99"  # dragon_slayer_white
 
 [colors.cursor]

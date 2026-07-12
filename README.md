@@ -9,7 +9,6 @@ cp alacritty/guts.toml ~/.config/alacritty/themes/themes/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-
 # optional
 cp zsh/oh-my-zsh/guts.zsh-theme ~/.oh-my-zsh/custom/themes/
 
@@ -25,18 +24,15 @@ npm -v
 npm i -g npm
 npm i -g pyright
 
-
-# Packer for nvim
+# Packer for nvim3
 mkdir -p ~/.local/share/nvim/site/pack/packer/start/
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-# Build telescope for nvim
-cd ~/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim
-make
-
-# but may be dont make telescope
+# for macOS
+brew install skhd yabai
+cp skhd ~/.config/skhd
+cp yabai ~/.config/yabai
 
 # For WSL download win32yank.exe and copy it to C/Windows/System32
 # In nvim/init.lua uncomment block for win32yank.exe 
@@ -44,7 +40,7 @@ make
 ```
 
 TODO:
-- add install utils: nvim tmux bat tree 
+- add install utils: nvim tmux bat tree
 - add install zsh
 - I will do it in script may be
-- add confs for skhd and yabai and add they to launchctl
+- add confs for skhd and yabai 

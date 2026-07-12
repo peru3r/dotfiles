@@ -1,0 +1,61 @@
+# WINDOW
+
+# focus window
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# resize window
+shift + alt - h : yabai -m window --resize left:-20:0
+shift + alt - j : yabai -m window --resize bottom:0:20
+shift + alt - k : yabai -m window --resize top:0:-20
+shift + alt - l : yabai -m window --resize right:20:0
+
+# balance size of windows
+alt - b : yabai -m space --balance
+
+# maximize window
+alt - a : yabai -m window --toggle zoom-fullscreen
+
+# toggle window split type
+alt - e : yabai -m window --toggle split
+
+# swap managed window
+ctrl + alt - h : yabai -m window --swap west
+ctrl + alt - j : yabai -m window --swap south
+ctrl + alt - k : yabai -m window --swap north
+ctrl + alt - l : yabai -m window --swap east
+
+# move managed window
+# shift + alt + ctrl - h : yabai -m window --warp west
+# shift + alt + ctrl - j : yabai -m window --warp south
+# shift + alt + ctrl - k : yabai -m window --warp north
+# shift + alt + ctrl - l : yabai -m window --warp east
+
+# SPACE
+
+
+# перейти на Space 1–5
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+
+# переместить окно и перейти на этот Space
+shift + alt - 1 : yabai -m window --space 1; yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space 2; yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space 3; yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space 4; yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space 5; yabai -m space --focus 5
+
+
+
+# open alacritty
+# cmd - return : /Applications/Alacritty.app/Contents/MacOS/alacritty -m window --toggle zoom-fullscreen -d ~
+
+# stop/start/restart yabai
+# ctrl + alt - q : pkill yabai
+# ctrl + alt - s : yabai &
+# ctrl + alt - r : yabai
