@@ -50,17 +50,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-    pattern = {'sh', 'go'},
-    callback = function()
-        vim.keymap.set('n', '<C-h>', ':w<CR>:!%<CR>', { buffer = true, silent = true })
-        vim.keymap.set('i', '<C-h>', '<Esc>:w<CR>:!%<CR>', { buffer = true, silent = true })
-    end
-})
-
---
-
-
 -- Common keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
 vim.keymap.set('n', ',<Space>', ':nohlsearch<CR>', { noremap = true })
@@ -68,8 +57,9 @@ vim.keymap.set('n', 'H', 'gT', { noremap = true }) -- Переключение �
 vim.keymap.set('n', 'L', 'gt', { noremap = true })
 vim.keymap.set('n', ',f', ':Telescope find_files<CR>', { noremap = true })
 vim.keymap.set('n', ',g', ':Telescope live_grep<CR>', { noremap = true })
-vim.keymap.set('n', 'gw', ':bp|bd #<CR>', { noremap = true, silent = true })
 vim.keymap.set('v','cc','"+y', { noremap = true, silent = true })   -- Visual: cc -> yank to system clipboard (y"+)
+
+
 
 -- Plugins with packer.nvim
 require('packer').startup(function(use)
@@ -164,11 +154,9 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
@@ -195,29 +183,19 @@ vim.lsp.config('pyright', {
 })
 
 
-
--- Пример настройки LSP для TypeScript
-
-vim.lsp.config('ts_ls', {
-    capabilities = capabilities,
-    on_attach = on_attach,
-})
-
-
-
--- Пример настройки LSP для Go
-
-vim.lsp.config('gopls', {
-    cmd = { "gopls" },
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-      gopls = {
-        analyses = { unusedparams = true },
-        staticcheck = true,
-    },
-  },
-})
+-- -- Пример настройки LSP для Go
+--
+-- vim.lsp.config('gopls', {
+--     cmd = { "gopls" },
+--     capabilities = capabilities,
+--     on_attach = on_attach,
+--     settings = {
+--       gopls = {
+--         analyses = { unusedparams = true },
+--         staticcheck = true,
+--     },
+--   },
+-- })
 
 -- None-ls (бывший null-ls) для Prettier
 local null_ls = require('null-ls')
@@ -229,14 +207,10 @@ null_ls.setup({
 })
 
 vim.lsp.enable('pyright')
-vim.lsp.enable('ts_ls')
-vim.lsp.enable('gopls')
-vim.lsp.enable('rust_analyzer')
-
 
 -- Telescope
 require('telescope').setup()
--- require('telescope').load_extension('fzf')
+require('telescope').load_extension('fzf')
 
 -- Auto-save
 require('auto-save').setup()
@@ -395,5 +369,4 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.signcolumn = 'no'
   end,
 })
-
 

@@ -29,6 +29,11 @@ mkdir -p ~/.local/share/nvim/site/pack/packer/start/
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
+cd ~/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim
+make 
+# or
+# cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release
+
 # for macOS
 brew install skhd yabai
 cp skhd ~/.config/skhd
