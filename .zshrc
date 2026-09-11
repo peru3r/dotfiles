@@ -106,16 +106,19 @@ alias n=nvim
 alias cat=bat
 alias t=tmux
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/peru3re/.lmstudio/bin"
-# End of LM Studio CLI section
+# Optional LM Studio CLI (lms).
+if [[ -d "$HOME/.lmstudio/bin" ]]; then
+    export PATH="$PATH:$HOME/.lmstudio/bin"
+fi
 case "$OSTYPE" in
     darwin*) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/os/macos.zsh" ;;
     linux*) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/os/linux.zsh" ;;
 esac
 
-# Doom Emacs в PATH
-export PATH="$HOME/.config/emacs/bin:$PATH"
+# Optional Doom Emacs CLI.
+if [[ -d "${XDG_CONFIG_HOME:-$HOME/.config}/emacs/bin" ]]; then
+    export PATH="${XDG_CONFIG_HOME:-$HOME/.config}/emacs/bin:$PATH"
+fi
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
