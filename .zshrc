@@ -103,7 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias n=nvim
-alias cat=bat
 alias t=tmux
 
 # Optional LM Studio CLI (lms).
@@ -122,6 +121,15 @@ fi
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Prefer bat, or its Debian/Ubuntu executable name batcat.
+if command -v bat >/dev/null 2>&1; then
+    alias cat=bat
+elif command -v batcat >/dev/null 2>&1; then
+    alias cat=batcat
+else
+    unalias cat 2>/dev/null
+fi
 
 # Machine-local overrides, loaded after all shared settings.
 if [[ -f "$HOME/.zshrc.local" && -r "$HOME/.zshrc.local" ]]; then
