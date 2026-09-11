@@ -109,11 +109,10 @@ alias t=tmux
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/peru3re/.lmstudio/bin"
 # End of LM Studio CLI section
-export PATH="/opt/homebrew/bin:$PATH"
-
-export PATH="/usr/local/bin:$PATH"
-
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+case "$OSTYPE" in
+    darwin*) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/os/macos.zsh" ;;
+    linux*) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/os/linux.zsh" ;;
+esac
 
 # Doom Emacs в PATH
 export PATH="$HOME/.config/emacs/bin:$PATH"
