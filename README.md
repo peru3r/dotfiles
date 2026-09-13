@@ -68,15 +68,28 @@ alias work='cd ~/projects'
 
 Этот файл хранится на конкретной машине и не развертывается из репозитория.
 
+## Тема Alacritty
+
+`alacritty/alacritty.toml` импортирует `~/.config/alacritty/themes/guts.toml`.
+Создайте ссылку на собственную тему из корня репозитория:
+
+```bash
+mkdir -p ~/.config/alacritty/themes
+if [ -e "$HOME/.config/alacritty/themes/guts.toml" ] || [ -L "$HOME/.config/alacritty/themes/guts.toml" ]; then
+    printf 'Проверьте существующий путь: %s\nОн должен указывать на alacritty/guts.toml этого репозитория.\n' "$HOME/.config/alacritty/themes/guts.toml"
+else
+    ln -s "$PWD/alacritty/guts.toml" "$HOME/.config/alacritty/themes/guts.toml"
+fi
+```
+
+Если по этому пути находится другая версия темы, сохраните ее перед заменой
+на ссылку. Коллекция `alacritty-theme` для `guts` не требуется. Этот путь
+соответствует текущему конфигу для macOS/Linux; конфиг Alacritty для Windows
+и поддержка нестандартного XDG-пути запланированы следующим пунктом этапа 1.
+
 ## Остальные шаги установки
 
 ```bash
-# Alacritty themes
-mkdir -p ~/.config/alacritty/themes
-git clone https://github.com/alacritty/alacritty-theme ~/.config/alacritty/themes
-
-cp alacritty/guts.toml ~/.config/alacritty/themes/themes/
-
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Необязательно: подключите guts по инструкции «Тема Oh My Zsh» выше.
