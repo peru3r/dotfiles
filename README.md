@@ -31,6 +31,28 @@ LM Studio (`$HOME/.lmstudio/bin`) и Doom Emacs
 удаляется и используется обычный `cat`. Выбор выполняется после настройки PATH
 и NVM, перед подключением `~/.zshrc.local`.
 
+### Тема Oh My Zsh
+
+В `.zshrc` выбрана встроенная тема `alanpeabody`. Собственная тема `guts`
+доступна как необязательная альтернатива. Для ее использования после установки
+Oh My Zsh создайте ссылку на тему, затем задайте `ZSH_THEME="guts"` в `.zshrc`
+перед загрузкой Oh My Zsh. Команды выполняются из корня репозитория:
+
+```bash
+theme_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes"
+mkdir -p "$theme_dir"
+if [ -e "$theme_dir/guts.zsh-theme" ] || [ -L "$theme_dir/guts.zsh-theme" ]; then
+    printf 'Проверьте существующий путь: %s\nОн должен указывать на zsh/oh-my-zsh/guts.zsh-theme этого репозитория.\n' "$theme_dir/guts.zsh-theme"
+else
+    ln -s "$PWD/zsh/oh-my-zsh/guts.zsh-theme" "$theme_dir/guts.zsh-theme"
+fi
+```
+
+Если по этому пути находится другая версия темы, сохраните ее перед заменой
+на ссылку. При нестандартном `ZSH_CUSTOM` используйте одно и то же значение
+при создании ссылки и при запуске Zsh. Без ссылки Oh My Zsh не найдет тему `guts`.
+Автоматическое создание ссылки через Dotbot предусмотрено этапом 3.
+
 ### Локальные настройки машины
 
 Для индивидуальных переменных, aliases и дополнений к `PATH` создайте
@@ -57,8 +79,7 @@ cp alacritty/guts.toml ~/.config/alacritty/themes/themes/
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# optional
-cp zsh/oh-my-zsh/guts.zsh-theme ~/.oh-my-zsh/custom/themes/
+# Необязательно: подключите guts по инструкции «Тема Oh My Zsh» выше.
 
 # Install nodejs and pyright LSP server for Python
 # https://nodejs.org/en/download/package-manager
