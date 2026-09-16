@@ -1,0 +1,7 @@
+[general]
+import = ["common.toml", "guts.toml"]
+
+[window]
+decorations = "Full"
+
+# Inherit the user's default shell and locale.

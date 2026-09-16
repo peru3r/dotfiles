@@ -1,0 +1,9 @@
+[general]
+import = ["common.toml", "guts.toml"]
+
+[window]
+decorations = "Full"
+
+[terminal.shell]
+program = "wsl.exe"
+args = ["~"]

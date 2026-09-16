@@ -1,0 +1,26 @@
+# Platform-independent settings. Colors are provided by guts.toml.
+[env]
+TERM = "xterm-256color"
+COLORTERM = "truecolor"
+
+[window]
+padding.x = 5
+padding.y = 5
+opacity = 0.9
+blur = false
+startup_mode = "Windowed"
+
+[font]
+normal.family = "Comic Mono"
+size = 15.0
+
+# Move by words with Alt + Left / Right.
+[[keyboard.bindings]]
+chars = "\u001Bb"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bf"
+key = "Right"
+mods = "Alt"

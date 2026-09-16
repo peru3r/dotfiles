@@ -1,0 +1,16 @@
+[general]
+import = ["common.toml", "guts.toml"]
+
+[env]
+LANG = "en_US.UTF-8"
+
+[window]
+decorations = "Buttonless"
+
+# Use the user's default shell.
+
+# No terminal action for Option + Space (system shortcut).
+[[keyboard.bindings]]
+key = "Space"
+mods = "Alt"
+action = "None"

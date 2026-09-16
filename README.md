@@ -68,24 +68,186 @@ alias work='cd ~/projects'
 
 Этот файл хранится на конкретной машине и не развертывается из репозитория.
 
-## Тема Alacritty
+## Alacritty
 
-`alacritty/alacritty.toml` импортирует `~/.config/alacritty/themes/guts.toml`.
-Создайте ссылку на собственную тему из корня репозитория:
+Конфиг разделен на пять файлов в `alacritty/`:
 
-```bash
-mkdir -p ~/.config/alacritty/themes
-if [ -e "$HOME/.config/alacritty/themes/guts.toml" ] || [ -L "$HOME/.config/alacritty/themes/guts.toml" ]; then
-    printf 'Проверьте существующий путь: %s\nОн должен указывать на alacritty/guts.toml этого репозитория.\n' "$HOME/.config/alacritty/themes/guts.toml"
-else
-    ln -s "$PWD/alacritty/guts.toml" "$HOME/.config/alacritty/themes/guts.toml"
-fi
+| Файл | Содержимое |
+| --- | --- |
+| `common.toml` | Общие настройки окна, шрифта, TERM/COLORTERM и Alt+стрелок |
+| `guts.toml` | Цветовая схема |
+| `macos.toml` | `Buttonless`, Alt+Space и локаль `en_US.UTF-8` |
+| `linux.toml` | `Full`, наследование локали |
+| `windows-wsl.toml` | `Full`, запуск `wsl.exe` с `args = ["~"]` |
+
+Каждый платформенный конфиг импортирует `common.toml` и `guts.toml` относительно
+своего расположения. Загрузка импортов проверена на Alacritty 0.15.1 для macOS.
+В macOS/Linux используется shell пользователя по умолчанию.
+Чтобы запускался Zsh, он должен быть выбран login shell пользователя либо через
+окружение `SHELL`. На Windows шрифт нужно установить на Windows-хосте.
+
+### macOS / Linux
+
+Развертывание через Dotbot будет реализовано в этапе 3. Схема трех ссылок в
+`${XDG_CONFIG_HOME:-$HOME/.config}/alacritty/`:
+
+```text
+alacritty.toml -> <репозиторий>/alacritty/macos.toml   # linux.toml для Linux
+common.toml   -> <репозиторий>/alacritty/common.toml
+guts.toml     -> <репозиторий>/alacritty/guts.toml
 ```
 
-Если по этому пути находится другая версия темы, сохраните ее перед заменой
-на ссылку. Коллекция `alacritty-theme` для `guts` не требуется. Этот путь
-соответствует текущему конфигу для macOS/Linux; конфиг Alacritty для Windows
-и поддержка нестандартного XDG-пути запланированы следующим пунктом этапа 1.
+Прежний единый `alacritty/alacritty.toml` заменен платформенными файлами: при
+обновлении потребуется изменить существующую ссылку на главный конфиг и разместить
+рядом обе ссылки на импортируемые файлы. Старый `themes/guts.toml` больше не используется.
+До развертывания новый конфиг можно открыть прямо из корня репозитория:
+
+```bash
+alacritty --config-file "$PWD/alacritty/macos.toml"  # linux.toml для Linux
+```
+
+При нестандартном `XDG_CONFIG_HOME` переменная должна быть доступна процессу
+Alacritty, включая запуск из графического окружения. Иначе передайте полный путь
+к развернутому `alacritty.toml` через `--config-file`.
+
+### Windows / WSL
+
+Пока выполняется ручное копирование. После сохранения существующих конфигов
+скопируйте файлы из репозитория в `%APPDATA%\alacritty`:
+
+```text
+windows-wsl.toml -> alacritty.toml
+common.toml     -> common.toml
+guts.toml       -> guts.toml
+```
+
+Все три файла должны находиться рядом. Главный конфиг запускает WSL-дистрибутив
+по умолчанию в домашнем каталоге. При обновлении повторите копирование трех файлов.
+Автоматизация доставки из WSL будет добавлена позже.
+
+### Проверка shell, шрифта и локали
+
+Текущий шрифт в `common.toml` — **Comic Mono**. Проверяйте его на системе,
+где запущен Alacritty: для Windows/WSL это Windows, а не Linux-дистрибутив.
+Установка шрифта пока выполняется вручную.
+
+**Shell — macOS/Linux и внутри WSL:**
+
+```bash
+printf 'SHELL=%s\n' "$SHELL"
+test -n "$SHELL" && test -f "$SHELL" && test -x "$SHELL"
+command -v zsh
+```
+
+`test` должен завершиться с кодом 0. `$SHELL` показывает shell, переданный через
+окружение; если он не задан, Alacritty в macOS/Linux использует login shell.
+Проверить login shell можно командами:
+
+```bash
+# macOS
+dscl . -read "/Users/$(id -un)" UserShell
+# Linux / внутри WSL
+getent passwd "$(id -un)"  # shell — последнее поле записи
+```
+
+Наличие `zsh` само по себе не делает его shell по умолчанию. Если используется
+другой shell, `.zshrc` автоматически не загрузится. Смена login shell — отдельное
+действие, конфигурация Alacritty ее не выполняет.
+
+**Шрифт:**
+
+- macOS: в Font Book («Шрифты») найдите семейство `Comic Mono` и убедитесь,
+  что оно активно. Системный список также доступен через
+  `system_profiler SPFontsDataType`.
+- Linux: выполните `fc-list : family` и `fc-match 'Comic Mono'`, если эти
+  утилиты Fontconfig доступны. В списке должно присутствовать именно семейство
+  `Comic Mono`, а `fc-match` должен выбирать его. Успешный код завершения
+  `fc-match` недостаточен: при отсутствии шрифта он может вернуть замену.
+- Windows: в «Параметры → Персонализация → Шрифты» проверьте наличие семейства
+  `Comic Mono`. После установки перезапустите Alacritty.
+
+**Локаль — в shell, запущенном из Alacritty:**
+
+```bash
+locale
+locale charmap
+locale -a
+```
+
+Ожидается кодировка UTF-8 без сообщений о недоступной локали. Linux и WSL
+наследуют настройки своей системы; выбранная локаль должна присутствовать
+в `locale -a`. На macOS конфиг задает `LANG=en_US.UTF-8`; его доступность можно
+отдельно проверить командой `LC_ALL=en_US.UTF-8 locale charmap`. Учтите, что
+унаследованные `LC_ALL` и `LC_*` имеют приоритет над `LANG`.
+
+**Запуск WSL — в PowerShell на Windows:**
+
+```powershell
+Get-Command wsl.exe -ErrorAction Stop
+wsl.exe --list --verbose
+wsl.exe ~
+```
+
+Должен открыться домашний каталог в WSL-дистрибутиве по умолчанию. Проверки shell
+и локали выполните уже внутри него. Эти проверки не меняют выбранный shell,
+не устанавливают шрифты и не генерируют локали; автоматическая диагностика
+запланирована в `doctor.sh`.
+
+### Проверка после развертывания
+
+Проверяйте именно развернутый конфиг. Alacritty может пропустить отсутствующий
+импорт, поэтому сначала убедитесь, что доступны все три файла.
+
+macOS/Linux:
+
+```bash
+(
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/alacritty"
+for file in alacritty.toml common.toml guts.toml; do
+    test -L "$config_dir/$file" && test -f "$config_dir/$file" && test -r "$config_dir/$file" || {
+        printf 'Ошибка: нет читаемой ссылки %s\n' "$config_dir/$file"
+        exit 1
+    }
+done
+alacritty migrate --dry-run --config-file "$config_dir/alacritty.toml" &&
+alacritty -vv --config-file "$config_dir/alacritty.toml"
+)
+```
+
+При ошибке проверки ссылок запуск прерывается; исправьте развертывание.
+Если на macOS команда отсутствует в PATH, используйте
+`/Applications/Alacritty.app/Contents/MacOS/alacritty`.
+
+Windows (PowerShell):
+
+```powershell
+$configDir = Join-Path $env:APPDATA 'alacritty'
+foreach ($file in @('alacritty.toml', 'common.toml', 'guts.toml')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $configDir $file) -PathType Leaf)) {
+        throw "Отсутствует конфиг: $file"
+    }
+}
+alacritty migrate --dry-run --config-file (Join-Path $configDir 'alacritty.toml')
+if ($LASTEXITCODE -ne 0) { throw 'Ошибка проверки конфигурации Alacritty' }
+alacritty -vv --config-file (Join-Path $configDir 'alacritty.toml')
+```
+
+`migrate --dry-run` разбирает файлы и рекурсивно проверяет импорты без записи
+изменений; это не полная проверка параметров приложения. При обычном запуске
+с `-vv` проверьте список загруженных конфигов и отсутствие ошибок конфигурации,
+а также цвета, Alt+стрелки, оформление окна и запуск ожидаемого shell/WSL.
+
+## yabai (macOS)
+
+`yabai/yabairc` — исполняемый POSIX shell-скрипт. Он не запускает
+`sudo yabai --load-sa` и не регистрирует загрузку scripting addition после
+перезапуска Dock. Настройка scripting addition отложена; полная работа
+существующих правил и сочетаний skhd для Spaces требует отдельной проверки.
+
+Если прежний конфиг уже зарегистрировал обработчик `dock_did_restart`, удаление
+строки из файла не удаляет его из работающего процесса. После развертывания
+обновленного конфига перезапустите службу yabai. Уже загруженная scripting
+addition этими изменениями не выгружается.
 
 ## Остальные шаги установки
 
