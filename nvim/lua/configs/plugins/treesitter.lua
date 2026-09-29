@@ -3,9 +3,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
+
     opts = {
       ensure_installed = {
+        "c",
         "lua",
         "vim",
         "vimdoc",
@@ -17,12 +18,16 @@ return {
         "markdown",
         "markdown_inline",
       },
-      highlight = {
-        enable = true,
-      },
-      indent = {
-        enable = true,
-      },
     },
+
+    config = function(_, opts)
+      require("nvim-treesitter").setup(opts)
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
+      })
+    end,
   },
 }

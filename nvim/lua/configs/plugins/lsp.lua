@@ -16,7 +16,7 @@ return {
       local on_attach = function(_, bufnr)
         local opts = { buffer = bufnr, noremap = true, silent = true }
 
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, {  buffer = bufnr, noremap = true, silent = true, desc = "definition" })
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -49,6 +49,16 @@ return {
 
       -- включаем сервер
       vim.lsp.enable("pyright")
+
+      -- clangd для C/C++
+      vim.lsp.config("clangd", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "clangd" },
+        filetypes = { "c", "cpp", "objc", "objcpp" },
+      })
+
+        vim.lsp.enable("clangd")
 
       -- nvim-cmp
       cmp.setup({
