@@ -1,28 +1,70 @@
 return {
-  {
-    "sainnhe/gruvbox-material",
-    lazy = true,
-    config = function()
-      vim.g.gruvbox_material_background = "hard"
-      vim.g.gruvbox_material_enable_italic = true
-      vim.cmd.colorscheme("gruvbox-material")
-    end,
-  },
+	{
+		"vossenwout/guts.nvim",
+		lazy = false,
+		config = function()
+		    vim.cmd.colorscheme("guts")
 
-  { "rebelot/kanagawa.nvim", lazy = true },
+		    -- transparent bg
+		    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+		end,
+	},
 
-  {
-    "vossenwout/guts.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme("guts")
+	{ 
+		"blazkowolf/gruber-darker.nvim",
+		lazy = false,
+		config = function()
+		    -- vim.cmd.colorscheme("gruber-darker")
+		end,
+	},
 
-      -- transparent bg
-      vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
-      vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
-      vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
-    end,
-  },
+    {
+        "IlyasYOY/theme.nvim",
+        lazy = false, 
+        config = function()
+            -- vim.cmd.colorscheme("ilyasyoy-mono")
+
+            -- transparent bg
+		    vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "NonText", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
+		    vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+
+        end,
+    },
+
+	{
+		"ellisonleao/gruvbox.nvim",
+		lazy = false,
+		config = function()
+		 -- vim.cmd.colorscheme("gruvbox")
+		end,
+	},
+
+	{ 
+		"rebelot/kanagawa.nvim", 
+		lazy = true,
+		config = function()
+		  -- vim.cmd.colorscheme("kanagawa")
+		end,
+	},
+
+
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		lazy = false,
+		config = function()
+		  require("rose-pine").setup({
+		  styles = {
+		    transparency = true,
+		  },
+		})
+
+		-- vim.cmd.colorscheme("rose-pine")
+		end,
+	},
 }

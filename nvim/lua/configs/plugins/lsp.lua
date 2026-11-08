@@ -46,7 +46,7 @@ return {
           },
         },
       })
-
+      vim.diagnostic.enable(false)
       -- включаем сервер
       vim.lsp.enable("pyright")
 

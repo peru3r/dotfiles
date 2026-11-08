@@ -23,15 +23,22 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Common keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true })
-vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>/', ':nohlsearch<CR>', { noremap = true, desc = "nohl" })
 vim.keymap.set('n', 'H', 'gT', { noremap = true }) -- Переключение вкладок
 vim.keymap.set('n', 'L', 'gt', { noremap = true })
-vim.keymap.set('v','<leader>y','"+y', { noremap = true, silent = true })   -- yank to system clipboard (y"+)
-vim.keymap.set('n', '<leader>pv', vim.cmd.Ex)
+vim.keymap.set('v','<leader>y','"+y', { noremap = true, silent = true, desc = "y\"+" })   -- yank to system clipboard ("+y)
+vim.keymap.set('n', '<leader>t', vim.cmd.Ex, { desc = "tree" })
 
 -- перемещение строк
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- копирование строки и сохранение положения курсора
+vim.keymap.set("n", "<leader>d", function()
+    local col = vim.fn.col(".")
+    vim.cmd("normal! yyp")
+    vim.fn.cursor(vim.fn.line("."), col)
+end, { desc = "Duplicate line" })
 
 
 -- Автоматическое закрытие скобок и кавычек
